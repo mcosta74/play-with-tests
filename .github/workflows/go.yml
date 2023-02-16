@@ -31,7 +31,10 @@ jobs:
 
     - name: Test
       run: |
-        gotestsum --junitfile test-results/junit.xml
+        gotestsum \
+          --junitfile-testsuite-name relative \
+          --junitfile-testcase-classname short \
+          --junitfile test-results/junit.xml
 
     - name: Upload Test Results
       if: always()
