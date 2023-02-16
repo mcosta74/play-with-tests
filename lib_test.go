@@ -1,6 +1,10 @@
 package playwithtests
 
-import "testing"
+import (
+	"runtime"
+	"strings"
+	"testing"
+)
 
 func TestAdd(t *testing.T) {
 	type args struct {
@@ -50,5 +54,12 @@ func TestMul(t *testing.T) {
 				t.Errorf("Mul() = %v, want %v", got, tt.want)
 			}
 		})
+	}
+}
+
+func TestFailOn1_20(t *testing.T) {
+	version := runtime.Version()
+	if strings.HasPrefix(version, "go1.20") {
+		t.Fatalf("failing for %s", version)
 	}
 }
