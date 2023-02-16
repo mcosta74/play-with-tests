@@ -24,5 +24,9 @@ jobs:
     - name: Build
       run: go build -v ./...
 
+    - name: Prepare for Testing
+      run: go install gotest.tools/gotestsum@latest
+
     - name: Test
-      run: go test -v ./...
+      run: gotestsum --format short-verbose --junitfile junit.xml
+    
