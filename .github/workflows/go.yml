@@ -12,7 +12,7 @@ on:
 permissions:
   checks: write
   pull-requests: write
-  
+
 jobs:
 
   build:
@@ -34,10 +34,11 @@ jobs:
     - name: Test
       run: |
         gotestsum --format short-verbose \
-          --junitfile-testsuite-name full \
-          --junitfile-testcase-classname relative \
           --junitfile junit.xml
-    
+
+    # --junitfile-testsuite-name full \
+    # --junitfile-testcase-classname relative \
+
     # - name: Test Report
     #   uses: dorny/test-reporter@v1
     #   if: always()    # run this step even if previous step failed
