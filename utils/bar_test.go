@@ -1,6 +1,10 @@
 package utils
 
-import "testing"
+import (
+	"runtime"
+	"strings"
+	"testing"
+)
 
 func TestReplaceSpaces(t *testing.T) {
 	type args struct {
@@ -59,5 +63,12 @@ func TestBaz(t *testing.T) {
 			t.Skipf("skipping %d", tt.in)
 
 		})
+	}
+}
+
+func TestFailOn1_19(t *testing.T) {
+	version := runtime.Version()
+	if strings.HasPrefix(version, "go1.19") {
+		t.Fatalf("failing for %s", version)
 	}
 }
