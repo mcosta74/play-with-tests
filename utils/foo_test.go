@@ -13,6 +13,7 @@ func TestHello(t *testing.T) {
 	}{
 		{"Massimo", args{"Massimo"}, "Hello Massimo"},
 		{"Marianna", args{"Marianna"}, "Hello Marianna"},
+		{"no name", args{""}, "Who are you?"},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
