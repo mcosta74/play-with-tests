@@ -28,3 +28,7 @@ func TestReplaceSpaces(t *testing.T) {
 		})
 	}
 }
+
+func TestFoo(t *testing.T) {
+	t.Skip("something to ignore")
+}
