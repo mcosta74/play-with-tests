@@ -14,7 +14,7 @@ func TestReplaceSpaces(t *testing.T) {
 		{"empty string", args{""}, ""},
 		{"string without spaces", args{"Something"}, "Something"},
 		{"string with spaces", args{"this is very interesting"}, "this_is_very_interesting"},
-		{"skip this", args{""}, ""},
+		{"skip", args{""}, ""},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -31,4 +31,33 @@ func TestReplaceSpaces(t *testing.T) {
 
 func TestFoo(t *testing.T) {
 	t.Skip("something to ignore")
+}
+
+func TestBar(t *testing.T) {
+	t.Run("hello", func(t *testing.T) {
+		t.Skip("something to ignore")
+	})
+
+	t.Run("foo", func(t *testing.T) {
+		// t.Skip("something to ignore")
+	})
+}
+
+func TestBaz(t *testing.T) {
+
+	tests := []struct {
+		name string
+		in   int
+		out  int
+	}{
+		{"a", 1, 2},
+		{"b", 2, 2},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			t.Skipf("skipping %d", tt.in)
+
+		})
+	}
 }
