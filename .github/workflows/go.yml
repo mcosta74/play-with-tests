@@ -31,6 +31,7 @@ jobs:
 
     - name: Test
       run: |
+        mkdir -p test-results
         gotestsum --junitfile test-results/junit.xml
 
     - name: Upload Test Results
