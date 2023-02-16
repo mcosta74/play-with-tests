@@ -31,15 +31,14 @@ jobs:
 
     - name: Test
       run: |
-        gotestsum --format short-verbose \
-          --junitfile junit.xml
+        gotestsum --junitfile test-results/junit.xml
 
     - name: Upload Test Results
       if: always()
       uses: actions/upload-artifact@v3
       with:
         name: Test Results (Go ${{ matrix.go }})
-        path: junit.xml
+        path: tests-results/junit.xml
 
   publish-test-results:
     name: "Publish Test Results"
