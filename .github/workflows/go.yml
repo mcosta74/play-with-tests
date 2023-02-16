@@ -32,8 +32,7 @@ jobs:
     - name: Test
       run: |
         gotestsum \
-          --junitfile-testsuite-name relative \
-          --junitfile-testcase-classname short \
+          --junitfile-testcase-classname relative \
           --junitfile test-results/junit.xml
 
     - name: Upload Test Results
