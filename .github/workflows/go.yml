@@ -31,7 +31,6 @@ jobs:
 
     - name: Test
       run: |
-        mkdir -p test-results
         gotestsum --junitfile test-results/junit.xml
 
     - name: Upload Test Results
@@ -39,7 +38,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: Test Results (Go ${{ matrix.go }})
-        path: tests-results/junit.xml
+        path: test-results/junit.xml
 
   publish-test-results:
     name: "Publish Test Results"
