@@ -31,10 +31,7 @@ jobs:
       run: go install gotest.tools/gotestsum@latest
 
     - name: Test
-      run: gotestsum \
-        --format=short-verbose \
-        --junitfile-testsuite-name=relative \
-        --junitfile=junit.xml
+      run: gotestsum --format short-verbose --junitfile-testsuite-name relative --junitfile junit.xml
     
     - name: Test Report
       uses: dorny/test-reporter@v1
