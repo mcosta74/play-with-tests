@@ -11,7 +11,8 @@ on:
 
 permissions:
   checks: write
-
+  pull-requests: write
+  
 jobs:
 
   build:
@@ -37,10 +38,17 @@ jobs:
           --junitfile-testcase-classname relative \
           --junitfile junit.xml
     
-    - name: Test Report
-      uses: dorny/test-reporter@v1
-      if: always()    # run this step even if previous step failed
+    # - name: Test Report
+    #   uses: dorny/test-reporter@v1
+    #   if: always()    # run this step even if previous step failed
+    #   with:
+    #     name: Go Tests            # Name of the check run which will be created
+    #     path: junit.xml    # Path to test results
+    #     reporter: jest-junit        # Format of test results
+
+    - name: Publish Test Results
+      uses: EnricoMi/publish-unit-test-result-action@v2
+      if: always()
       with:
-        name: Go Tests            # Name of the check run which will be created
-        path: junit.xml    # Path to test results
-        reporter: jest-junit        # Format of test results
+        files: |
+          junit.xml
