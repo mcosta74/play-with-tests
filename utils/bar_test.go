@@ -2,6 +2,7 @@ package utils
 
 import (
 	"testing"
+	"time"
 )
 
 func TestReplaceSpaces(t *testing.T) {
@@ -24,4 +25,50 @@ func TestReplaceSpaces(t *testing.T) {
 			}
 		})
 	}
+}
+
+func TestCleanup(t *testing.T) {
+	t.Cleanup(func() {
+		t.Log("First Cleanup")
+	})
+
+	t.Cleanup(func() {
+		t.Log("Second Cleanup")
+	})
+
+	t.Log("setup")
+
+	t.Run("first", func(t *testing.T) {
+		t.Log("inside first")
+	})
+
+	t.Run("second", func(t *testing.T) {
+		t.Log("inside second")
+	})
+
+	t.Log("teardown")
+}
+
+func TestGroup(t *testing.T) {
+	t.Log("main setup")
+
+	t.Run("group", func(t *testing.T) {
+
+		t.Log("group setup")
+
+		tests := []string{"a", "b", "c"}
+
+		for _, tt := range tests {
+			tt := tt
+			t.Run(tt, func(t *testing.T) {
+				t.Parallel()
+				t.Logf("start %s", tt)
+				defer t.Logf("stop %s", tt)
+
+				time.Sleep(1000 * time.Millisecond)
+			})
+		}
+		t.Log("group teardown")
+	})
+	t.Log("main teardown")
 }
