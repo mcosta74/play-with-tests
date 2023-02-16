@@ -34,7 +34,7 @@ jobs:
       run: |
         gotestsum --format short-verbose \
           --junitfile-testsuite-name full \
-          --junitfile-testcase-classname short \
+          --junitfile-testcase-classname relative \
           --junitfile junit.xml
     
     - name: Test Report
