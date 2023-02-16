@@ -14,9 +14,36 @@ permissions:
   pull-requests: write
 
 jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Go
+      uses: actions/setup-go@v3
+      with:
+        go-version: 1.19
+
+    - name: Prepare for Testing
+      run: go install gotest.tools/gotestsum@latest
+
+    - name: Test
+      run: |
+        gotestsum --format short-verbose \
+          --junitfile junit.xml
+
+    - name: Publish Test Results
+      uses: EnricoMi/publish-unit-test-result-action@v2
+      if: always()
+      with:
+        files: |
+          junit.xml
 
   build:
     runs-on: ubuntu-latest
+    needs: test
+
     steps:
     - uses: actions/checkout@v3
 
@@ -27,29 +54,3 @@ jobs:
 
     - name: Build
       run: go build -v ./...
-
-    - name: Prepare for Testing
-      run: go install gotest.tools/gotestsum@latest
-
-    - name: Test
-      run: |
-        gotestsum --format short-verbose \
-          --junitfile junit.xml
-
-    # --junitfile-testsuite-name full \
-    # --junitfile-testcase-classname relative \
-
-    # - name: Test Report
-    #   uses: dorny/test-reporter@v1
-    #   if: always()    # run this step even if previous step failed
-    #   with:
-    #     name: Go Tests            # Name of the check run which will be created
-    #     path: junit.xml    # Path to test results
-    #     reporter: jest-junit        # Format of test results
-
-    - name: Publish Test Results
-      uses: EnricoMi/publish-unit-test-result-action@v2
-      if: always()
-      with:
-        files: |
-          junit.xml
