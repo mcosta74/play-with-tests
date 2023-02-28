@@ -65,7 +65,12 @@ jobs:
         #   files: "artifacts/**/*.xml"
         uses: mikepenz/action-junit-report@v3.7.5
         with:
+          check_name: 'Unit Tests Results'
+          detailed_summary: true
           report_paths: "artifacts/**/*.xml"
+          summary: |
+            This is the summary, let's try some *Markdown*
+
 
 
   build:
@@ -78,7 +83,7 @@ jobs:
     - name: Set up Go
       uses: actions/setup-go@v3
       with:
-        go-version: 1.20
+        go-version: '1.20'
 
     - name: Build
       run: go build -v ./...
