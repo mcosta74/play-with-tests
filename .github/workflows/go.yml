@@ -60,18 +60,10 @@ jobs:
           path: artifacts
 
       - name: Publish Test Results
-        # uses: EnricoMi/publish-unit-test-result-action@v2
-        # with:
-        #   files: "artifacts/**/*.xml"
-        uses: mikepenz/action-junit-report@v3.7.5
+        uses: EnricoMi/publish-unit-test-result-action@v2
         with:
-          check_name: 'Unit Tests Results'
-          detailed_summary: true
-          report_paths: "artifacts/**/*.xml"
-          summary: |
-            This is the summary, let's try some *Markdown*
-
-
+          files: "artifacts/**/*.xml"
+          report_individual_runs: true
 
   build:
     runs-on: ubuntu-latest
