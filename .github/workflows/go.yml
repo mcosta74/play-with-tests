@@ -60,9 +60,13 @@ jobs:
           path: artifacts
 
       - name: Publish Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v2
+        # uses: EnricoMi/publish-unit-test-result-action@v2
+        # with:
+        #   files: "artifacts/**/*.xml"
+        uses: mikepenz/action-junit-report@v3.7.5
         with:
-          files: "artifacts/**/*.xml"
+          report_paths: "artifacts/**/*.xml"
+
 
   build:
     runs-on: ubuntu-latest
@@ -74,7 +78,7 @@ jobs:
     - name: Set up Go
       uses: actions/setup-go@v3
       with:
-        go-version: 1.19
+        go-version: 1.20
 
     - name: Build
       run: go build -v ./...
