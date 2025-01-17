@@ -32,7 +32,9 @@ jobs:
     - name: Test
       run: |
         mkdir -p test-results
-        go test -json ./... | go-ctrf-json-reporter -output test-results/ctrf-report-${{ matrix.go }}.json
+        go test -json ./... | go-ctrf-json-reporter \
+          -output test-results/ctrf-report-${{ matrix.go }}.json \
+          -appName "Test ${{ matrix.go }}"
 
     - name: Upload Test Results
       if: always()
