@@ -42,9 +42,6 @@ jobs:
         summary-report: true
         skipped-report: true
         failed-folded-report: true
-        pull-request: true
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   
     - name: Upload Test Results
       if: always()
@@ -78,6 +75,8 @@ jobs:
           skipped-report: true
           failed-folded-report: true
           pull-request: true
+          update-comment: true
+          comment-tag: '${{ github.workflow }}-${{ github.job }}'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
