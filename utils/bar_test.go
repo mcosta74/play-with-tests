@@ -1,6 +1,8 @@
 package utils
 
 import (
+	"runtime"
+	"strings"
 	"testing"
 	"time"
 )
@@ -39,10 +41,16 @@ func TestCleanup(t *testing.T) {
 	t.Log("setup")
 
 	t.Run("first", func(t *testing.T) {
+		if strings.HasPrefix(runtime.Version(), "go1.23") {
+			t.Fatal("not supported Go version")
+		}
 		t.Log("inside first")
 	})
 
 	t.Run("second", func(t *testing.T) {
+		if strings.HasPrefix(runtime.Version(), "go1.22") {
+			t.Skip("skipping test; not supported in this version of Go")
+		}
 		t.Log("inside second")
 	})
 
