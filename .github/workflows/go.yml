@@ -32,7 +32,7 @@ jobs:
     - name: Test
       run: |
         mkdir -p test-results
-        go test -json ./... | go-ctrf-json-reporter -output test-results/ctrf-report.json
+        go test -json ./... | go-ctrf-json-reporter -output test-results/ctrf-report-{{ matrix.go }}.json
 
     - name: Upload Test Results
       if: always()
@@ -61,7 +61,7 @@ jobs:
       - name: Publish Test Results
         uses: ctrf-io/github-test-reporter@v1
         with:
-          report-path: "artifacts/test-results/*.json"
+          report-path: "artifacts/**/*.json"
           summary-report: true
           failed-folded-report: true
           suite-folded-report: true
