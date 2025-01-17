@@ -65,6 +65,7 @@ jobs:
         with:
           report-path: "artifacts/**/*.json"
           summary-report: true
+          skipped-report: true
           failed-folded-report: true
           suite-folded-report: true
 
