@@ -61,7 +61,11 @@ jobs:
       - name: Publish Test Results
         uses: ctrf-io/github-test-reporter@v1
         with:
-          report-path: "artifacts/**/*.json"
+          report-path: "artifacts/test-results/*.json"
+          summary-report: true
+          failed-folded-report: true
+          suite-folded-report: true
+
 
   build:
     runs-on: ubuntu-latest
