@@ -74,6 +74,7 @@ jobs:
           summary-report: true
           skipped-report: true
           failed-folded-report: true
+          pull-request: true
 
 
   build:
