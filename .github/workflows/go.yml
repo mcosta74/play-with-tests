@@ -31,6 +31,7 @@ jobs:
 
     - name: Test
       run: |
+        mkdir -p test-results
         go test -json ./... | go-ctrf-json-reporter -output test-results/ctrf-report.json
 
     - name: Upload Test Results
