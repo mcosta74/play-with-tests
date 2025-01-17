@@ -43,7 +43,9 @@ jobs:
         skipped-report: true
         failed-folded-report: true
         pull-request: true
-
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  
     - name: Upload Test Results
       if: always()
       uses: actions/upload-artifact@v3
@@ -76,7 +78,8 @@ jobs:
           skipped-report: true
           failed-folded-report: true
           pull-request: true
-
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   build:
     runs-on: ubuntu-latest
