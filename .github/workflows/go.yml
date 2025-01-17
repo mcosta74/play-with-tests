@@ -33,8 +33,15 @@ jobs:
       run: |
         mkdir -p test-results
         go test -json ./... | go-ctrf-json-reporter \
-          -output test-results/ctrf-report-${{ matrix.go }}.json \
-          -appName "Test ${{ matrix.go }}"
+          -output test-results/ctrf-report-${{ matrix.go }}.json
+
+    - name: Publish Test Results
+      uses: ctrf-io/github-test-reporter@v1
+      with:
+        report-path: "./test-results/ctrf-report-${{ matrix.go }}.json"
+        summary-report: true
+        skipped-report: true
+        failed-folded-report: true
 
     - name: Upload Test Results
       if: always()
@@ -44,7 +51,7 @@ jobs:
         path: test-results/*.json
 
   publish-test-results:
-    name: "Publish Test Results"
+    name: "Publish Test Results Summary"
     needs: test
     runs-on: ubuntu-latest
 
@@ -67,7 +74,6 @@ jobs:
           summary-report: true
           skipped-report: true
           failed-folded-report: true
-          suite-folded-report: true
 
 
   build:
